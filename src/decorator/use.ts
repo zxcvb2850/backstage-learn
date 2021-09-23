@@ -1,4 +1,6 @@
 import {Middleware} from "koa";
+import KoaJwt from "koa-jwt";
+import config from "../config/config";
 
 export const uses = (middleware: Middleware) => {
     return (target: any, key: string) => {
@@ -7,3 +9,7 @@ export const uses = (middleware: Middleware) => {
         Reflect.defineMetadata('middlewares', originMiddleware, target, key);
     }
 };
+
+export const useAuth = KoaJwt({
+    secret: config.secret,
+});
