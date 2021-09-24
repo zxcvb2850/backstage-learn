@@ -27,9 +27,9 @@ class RouterController {
     @get('/verify')
     @uses(useAuth)
     async getVerify(ctx: Context) {
-        const {query} = ctx.request;
-        const verifyResult = verify(query.token);
+        const verifyResult = verify(ctx);
         console.log("verifyResult", verifyResult);
-        ctx.body = `<h1>This Is Verify ${query.token}</h1>`
+        const {payload} = (typeof verifyResult === 'string' || !verifyResult) ? {payload: null} : verifyResult;
+        ctx.body = `<h1>This Is Verify ${payload?.name}</h1>`
     }
 }

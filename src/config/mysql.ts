@@ -1,32 +1,5 @@
 import mysql, {Connection} from "mysql";
 import config from "./config";
-/*
-
-const sql = mysql.createConnection(config.mysql);
-
-sql.connect((err) => {
-    if (err) {
-        console.error("connect mysql error: ", err);
-        return;
-    }
-
-    console.info("connect mysql success");
-});
-
-export const query: () => Promise<MysqlError | any> = () => {
-    return new Promise(async (resolve, reject) => {
-        sql.query(`select * from \`i_admin_users\``, (err, result) => {
-            if (err) {
-                reject(err);
-            }
-
-            resolve(result);
-        });
-    })
-}
-
-export default sql;*/
-
 
 // 连接 mysql
 const connect: () => Connection = () => {

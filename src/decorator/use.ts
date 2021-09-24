@@ -1,4 +1,4 @@
-import {Middleware} from "koa";
+import {Context, Middleware} from "koa";
 import KoaJwt from "koa-jwt";
 import config from "../config/config";
 
@@ -11,5 +11,10 @@ export const uses = (middleware: Middleware) => {
 };
 
 export const useAuth = KoaJwt({
-    secret: config.secret,
+    secret: config.adminSecret,
+    getToken: (ctx: Context) => {
+        const {header} = ctx.response;
+        const {Authorization} = header;
+        return !!Authorization ? Authorization as string : null;
+    }
 });
